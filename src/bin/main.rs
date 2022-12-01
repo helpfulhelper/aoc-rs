@@ -25,7 +25,7 @@ pub fn output<T: Display>(output: T) -> Vec<String> {
 }
 
 fn main() {
-    let runners: Vec<fn(Selector)> = vec![run_2015, run_2016];
+    let runners: Vec<fn(Selector)> = vec![run_2015, run_2022];
     let args = std::env::args().collect::<Vec<String>>();
 
     if args.len() == 2 && args[1] == "all" {
@@ -47,9 +47,9 @@ fn main() {
             std::process::exit(1);
         };
 
-        if !(2015..=2021).contains(&year) {
+        if !(2015..=2022).contains(&year) {
             // if year < 2015 || year > 2021 {
-            eprintln!("Year must be in range 2015..2021");
+            eprintln!("Year must be in range 2015..2022");
             std::process::exit(1);
         }
 
