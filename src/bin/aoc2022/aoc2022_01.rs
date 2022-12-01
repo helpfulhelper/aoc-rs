@@ -1,4 +1,4 @@
-use aoc::read_lines2;
+use aoc::read_lines_raw;
 
 pub struct AoC2022_01 {
     data: Vec<u32>,
@@ -12,7 +12,7 @@ impl AoC2022_01 {
 
 impl crate::Runner for AoC2022_01 {
     fn parse(&mut self) {
-        let temp = read_lines2("input/2022-01.txt");
+        let temp = read_lines_raw("input/2022/01.txt");
         let mut t: Vec<u32> = Vec::new();
         for x in temp {
             if let Ok(y) = x.parse::<u32>() {
