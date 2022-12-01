@@ -22,12 +22,10 @@ impl crate::Runner for AoC2022_01 {
     }
 
     fn part1(&mut self) -> Vec<String> {
-        vec!["0".to_string()]
-        // crate::output(self.data.iter())
+        crate::output("0".to_string())
     }
 
     fn part2(&mut self) -> Vec<String> {
-        // crate::output(self.data.iter())
-        vec!["0".to_string()]
+        crate::output("0".to_string())
     }
 }
