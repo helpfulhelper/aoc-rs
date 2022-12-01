@@ -37,7 +37,7 @@ pub fn read_lines<T: AsRef<Path>>(pathname: T) -> Vec<String> {
         .collect()
 }
 
-pub fn read_lines2<T: AsRef<Path>>(pathname: T) -> Vec<String> {
+pub fn read_lines_raw<T: AsRef<Path>>(pathname: T) -> Vec<String> {
     read_to_string(pathname)
         .expect("unable to open file")
         .split('\n')
