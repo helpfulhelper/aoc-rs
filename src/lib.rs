@@ -36,3 +36,11 @@ pub fn read_lines<T: AsRef<Path>>(pathname: T) -> Vec<String> {
         .filter(|s| !s.is_empty())
         .collect()
 }
+
+pub fn read_lines2<T: AsRef<Path>>(pathname: T) -> Vec<String> {
+    read_to_string(pathname)
+        .expect("unable to open file")
+        .split('\n')
+        .map(|s| s.to_string())
+        .collect()
+}

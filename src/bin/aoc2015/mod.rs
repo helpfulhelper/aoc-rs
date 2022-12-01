@@ -2,7 +2,7 @@ use crate::{Runner, Selector};
 
 mod aoc2015_01;
 mod aoc2015_02;
-// mod aoc2015_03;
+mod aoc2015_03;
 // mod aoc2015_04;
 // mod aoc2015_05;
 // mod aoc2015_06;
@@ -28,7 +28,7 @@ mod aoc2015_02;
 
 use aoc2015_01::*;
 use aoc2015_02::*;
-// use aoc2015_03::*;
+use aoc2015_03::*;
 // use aoc2015_04::*;
 // use aoc2015_05::*;
 // use aoc2015_06::*;
@@ -55,7 +55,7 @@ use aoc2015_02::*;
 pub fn run_2015(which: Selector) {
     let mut day01 = AoC2015_01::new();
     let mut day02 = AoC2015_02::new();
-    // let mut day03 = AoC2015_03::new();
+    let mut day03 = AoC2015_03::new();
     // let mut day04 = AoC2015_04::new();
     // let mut day05 = AoC2015_05::new();
     // let mut day06 = AoC2015_06::new();
@@ -80,9 +80,8 @@ pub fn run_2015(which: Selector) {
     // let mut day25 = AoC2015_25::new();
 
     let mut days: Vec<&mut dyn Runner> = vec![
-        &mut day01,
-        &mut day02,
-        // &mut day03,
+        &mut day01, &mut day02,
+        &mut day03,
         // &mut day04,
         // &mut day05,
         // &mut day06,

@@ -25,7 +25,7 @@ pub fn output<T: Display>(output: T) -> Vec<String> {
 }
 
 fn main() {
-    let runners: Vec<fn(Selector)> = vec![run_2015];
+    let runners: Vec<fn(Selector)> = vec![run_2015, run_2022];
     let args = std::env::args().collect::<Vec<String>>();
 
     if args.len() == 2 && args[1] == "all" {
