@@ -13,7 +13,7 @@ impl AoC2022_01 {
 
 impl crate::Runner for AoC2022_01 {
     fn parse(&mut self) {
-        self.data = read_to_chars("input/2022/01.txt");
+        self.data = read_to_chars("../input/2022/01.txt");
     }
 
     //year, day

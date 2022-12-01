@@ -12,7 +12,7 @@ impl AoC2015_01 {
 
 impl crate::Runner for AoC2015_01 {
     fn parse(&mut self) {
-        self.data = read_to_chars("input/2015/01.txt");
+        self.data = read_to_chars("../input/2015/01.txt");
     }
 
     fn name(&self) -> (usize, usize) {

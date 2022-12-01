@@ -14,7 +14,7 @@ impl AoC2015_ {
 
 impl crate::Runner for AoC2015_ {
     fn parse(&mut self) {
-        let mut data = numbers("input/2015-02.txt", 'x');
+        let mut data = numbers("../input/2015/02.txt", 'x');
         // for d in &mut data {
         //     d.sort();
         //     self.data.push(Present::new(d[0], d[1], d[2]))
