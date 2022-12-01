@@ -1,7 +1,7 @@
 use crate::{Runner, Selector};
 
 mod aoc2015_01;
-// mod aoc2015_02;
+mod aoc2015_02;
 // mod aoc2015_03;
 // mod aoc2015_04;
 // mod aoc2015_05;
@@ -27,7 +27,7 @@ mod aoc2015_01;
 // mod aoc2015_25;
 
 use aoc2015_01::*;
-// use aoc2015_02::*;
+use aoc2015_02::*;
 // use aoc2015_03::*;
 // use aoc2015_04::*;
 // use aoc2015_05::*;
