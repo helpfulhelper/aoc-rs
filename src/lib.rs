@@ -1,14 +1,38 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use std::fmt::Debug;
+use std::fs::read_to_string;
+use std::path::Path;
+use std::str::FromStr;
+
+pub fn read_to_chars<T: AsRef<Path>>(pathname: T) -> Vec<char> {
+    let data = read_to_string(pathname).expect("unable to open file");
+    data.chars().collect()
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub fn numbers<T: AsRef<Path>, U: FromStr>(pathname: T, sep: char) -> Vec<Vec<U>>
+where
+    <U as FromStr>::Err: Debug,
+{
+    let data = read_to_string(pathname).expect("unable to open file");
+    let mut result = Vec::new();
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    for line in data.split('\n') {
+        if !line.is_empty() {
+            let iter = line.split(sep);
+            result.push(
+                iter.map(|x| x.parse::<U>().expect("unable to parse number"))
+                    .collect::<Vec<U>>(),
+            );
+        }
     }
+
+    result
+}
+
+pub fn read_lines<T: AsRef<Path>>(pathname: T) -> Vec<String> {
+    read_to_string(pathname)
+        .expect("unable to open file")
+        .split('\n')
+        .map(|s| s.to_string())
+        .filter(|s| !s.is_empty())
+        .collect()
 }
