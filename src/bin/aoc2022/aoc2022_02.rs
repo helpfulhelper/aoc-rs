@@ -18,7 +18,7 @@ impl crate::Runner for AoC2022_02 {
 
     //year, day
     fn name(&self) -> (usize, usize) {
-        (2022, 1)
+        (2022, 2)
     }
 
     fn part1(&mut self) -> Vec<String> {

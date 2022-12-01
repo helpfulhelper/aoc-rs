@@ -41,5 +41,44 @@
             "args": [],
             "cwd": "${workspaceFolder}"
         },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "AoC current",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=main",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "main",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "AoC 2015",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=main",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "main",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "2015",
+                "3"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
     ]
 }

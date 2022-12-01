@@ -1,24 +1,24 @@
 use aoc::read_to_chars;
 // use aoc::read_lines;
 
-pub struct AoC2022_XX {
+pub struct AoCYYYY_DD {
     data: Vec<char>,
 }
 
-impl AoC2022_XX {
+impl AoCYYYY_DD {
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
 }
 
-impl crate::Runner for AoC2022_XX {
+impl crate::Runner for AoCYYYY_DD {
     fn parse(&mut self) {
-        self.data = read_to_chars("../input/2022/XX.txt");
+        self.data = read_to_chars("../input/YYYY/DD.txt");
     }
 
     //year, day
     fn name(&self) -> (usize, usize) {
-        (2022, XX)
+        (YYYY, DD)
     }
 
     fn part1(&mut self) -> Vec<String> {
