@@ -52,8 +52,7 @@ impl Results {
 }
 
 fn round(e: Move, m: Move) -> Results {
-    let temp = (e, m);
-    match temp {
+    match (e, m) {
         (Rock, Rock) => Draw,
         (Rock, Paper) => Win,
         (Rock, Scissors) => Lose,
@@ -66,9 +65,8 @@ fn round(e: Move, m: Move) -> Results {
     }
 }
 
-fn fixed(enemy: Move, m: Results) -> Move {
-    let temp = (enemy, m);
-    match temp {
+fn fixed(e: Move, m: Results) -> Move {
+    match (e, m) {
         (Rock, Lose) => Scissors,
         (Rock, Draw) => Rock,
         (Rock, Win) => Paper,
