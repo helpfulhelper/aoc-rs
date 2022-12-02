@@ -3,7 +3,7 @@ use aoc::read_lines;
 
 #[derive(Default)]
 pub struct AoC2022_02 {
-    data: Vec<(char, char)>,
+    data: Vec<(String, String)>,
 }
 
 impl AoC2022_02 {
@@ -30,22 +30,22 @@ use Move::{Paper, Rock, Scissors};
 use Results::{Draw, Lose, Win};
 
 impl Move {
-    pub fn parse(c: char) -> Move {
+    pub fn parse(c: &str) -> Move {
         match c {
-            'A' | 'X' => Rock,
-            'B' | 'Y' => Paper,
-            'C' | 'Z' => Scissors,
+            "A" | "X" => Rock,
+            "B" | "Y" => Paper,
+            "C" | "Z" => Scissors,
             _ => panic!("BAD!"),
         }
     }
 }
 
 impl Results {
-    pub fn parse(c: char) -> Results {
+    pub fn parse(c: &str) -> Results {
         match c {
-            'X' => Lose,
-            'Y' => Draw,
-            'Z' => Win,
+            "X" => Lose,
+            "Y" => Draw,
+            "Z" => Win,
             _ => panic!("BAD!"),
         }
     }
@@ -83,9 +83,8 @@ impl crate::Runner for AoC2022_02 {
     fn parse(&mut self) {
         let lines = read_lines("../input/2022/02.txt");
         for l in lines {
-            let (opp, me) = l.split_once(' ').unwrap();
-            self.data
-                .push((opp.chars().next().unwrap(), me.chars().next().unwrap()));
+            let (e, m) = l.split_once(' ').unwrap();
+            self.data.push((e.to_string(), m.to_string()));
         }
     }
 
@@ -98,8 +97,8 @@ impl crate::Runner for AoC2022_02 {
         let mut match_score = 0;
         let mut hand_score = 0;
         for d in &self.data {
-            let e = Move::parse(d.0);
-            let m = Move::parse(d.1);
+            let e = Move::parse(&d.0);
+            let m = Move::parse(&d.1);
             hand_score += m as i32;
             match_score += round(e, m) as i32;
         }
@@ -111,8 +110,8 @@ impl crate::Runner for AoC2022_02 {
         let mut match_score = 0;
         let mut hand_score = 0;
         for d in &self.data {
-            let e = Move::parse(d.0);
-            let m = Results::parse(d.1);
+            let e = Move::parse(&d.0);
+            let m = Results::parse(&d.1);
             hand_score += fixed(e, m) as i32;
             match_score += m as i32;
         }
