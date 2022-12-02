@@ -1,17 +1,25 @@
 //use aoc::read_to_chars;
 use aoc::read_lines;
 
+#[derive(Default)]
 pub struct AoC2022_02 {
-    data: Vec<String>,
+    data: Vec<(char, char)>,
 }
-#[derive(Debug, Copy, Clone)]
+
+impl AoC2022_02 {
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+#[derive(Copy, Clone)]
 pub enum Move {
     Rock = 1,
     Paper = 2,
     Scissors = 3,
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Copy, Clone)]
 pub enum Results {
     Win = 6,
     Lose = 0,
@@ -22,22 +30,22 @@ use Move::{Paper, Rock, Scissors};
 use Results::{Draw, Lose, Win};
 
 impl Move {
-    pub fn parse(c: &str) -> Move {
+    pub fn parse(c: char) -> Move {
         match c {
-            "A" | "X" => Rock,
-            "B" | "Y" => Paper,
-            "C" | "Z" => Scissors,
+            'A' | 'X' => Rock,
+            'B' | 'Y' => Paper,
+            'C' | 'Z' => Scissors,
             _ => panic!("BAD!"),
         }
     }
 }
 
 impl Results {
-    pub fn parse(c: &str) -> Results {
+    pub fn parse(c: char) -> Results {
         match c {
-            "X" => Lose,
-            "Y" => Draw,
-            "Z" => Win,
+            'X' => Lose,
+            'Y' => Draw,
+            'Z' => Win,
             _ => panic!("BAD!"),
         }
     }
@@ -73,15 +81,14 @@ fn fixed(enemy: Move, m: Results) -> Move {
     }
 }
 
-impl AoC2022_02 {
-    pub fn new() -> Self {
-        Self { data: Vec::new() }
-    }
-}
-
 impl crate::Runner for AoC2022_02 {
     fn parse(&mut self) {
-        self.data = read_lines("../input/2022/02.txt");
+        let lines = read_lines("../input/2022/02.txt");
+        for l in lines {
+            let (opp, me) = l.split_once(' ').unwrap();
+            self.data
+                .push((opp.chars().next().unwrap(), me.chars().next().unwrap()));
+        }
     }
 
     //year, day
@@ -92,11 +99,9 @@ impl crate::Runner for AoC2022_02 {
     fn part1(&mut self) -> Vec<String> {
         let mut match_score = 0;
         let mut hand_score = 0;
-        let matches = self.data.clone();
-        for d in matches {
-            let t: Vec<&str> = d.split(' ').collect();
-            let e = Move::parse(t[0]);
-            let m = Move::parse(t[1]);
+        for d in &self.data {
+            let e = Move::parse(d.0);
+            let m = Move::parse(d.1);
             hand_score += m as i32;
             match_score += round(e, m) as i32;
         }
@@ -107,11 +112,9 @@ impl crate::Runner for AoC2022_02 {
     fn part2(&mut self) -> Vec<String> {
         let mut match_score = 0;
         let mut hand_score = 0;
-        let matches = self.data.clone();
-        for d in matches {
-            let t: Vec<&str> = d.split(' ').collect();
-            let e = Move::parse(t[0]);
-            let m = Results::parse(t[1]);
+        for d in &self.data {
+            let e = Move::parse(d.0);
+            let m = Results::parse(d.1);
             hand_score += fixed(e, m) as i32;
             match_score += m as i32;
         }
