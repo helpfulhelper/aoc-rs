@@ -97,8 +97,8 @@ impl crate::Runner for AoC2022_02 {
             let t: Vec<&str> = d.split(' ').collect();
             let e = Move::parse(t[0]);
             let m = Move::parse(t[1]);
-            hand_score = hand_score + m as i32;
-            match_score = match_score + round(e, m) as i32;
+            hand_score += m as i32;
+            match_score += round(e, m) as i32;
         }
         let total = match_score + hand_score;
         crate::output(total.to_string())
@@ -112,8 +112,8 @@ impl crate::Runner for AoC2022_02 {
             let t: Vec<&str> = d.split(' ').collect();
             let e = Move::parse(t[0]);
             let m = Results::parse(t[1]);
-            hand_score = hand_score + fixed(e, m) as i32;
-            match_score = match_score + m as i32;
+            hand_score += fixed(e, m) as i32;
+            match_score += m as i32;
         }
         let total = match_score + hand_score;
         crate::output(total.to_string())
