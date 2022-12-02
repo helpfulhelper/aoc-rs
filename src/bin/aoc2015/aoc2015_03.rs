@@ -43,6 +43,22 @@ impl crate::Runner for AoC2015_03 {
     }
 
     fn part2(&mut self) -> Vec<String> {
-        crate::output("0".to_string())
+        let mut grid = HashSet::new();
+        let mut x = [0, 0];
+        let mut y = [0, 0];
+        let mut tog = 0;
+        for c in &self.data {
+            grid.insert((x[tog], y[tog]));
+            match c {
+                '^' => y[tog] += 1,
+                'v' => y[tog] -= 1,
+                '<' => x[tog] -= 1,
+                '>' => x[tog] += 1,
+                _ => panic!("invalid char '{c}'"),
+            }
+            tog = 1 - tog;
+        }
+        grid.insert((x[tog], y[tog]));
+        crate::output(grid.len())
     }
 }

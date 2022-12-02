@@ -76,7 +76,7 @@
             },
             "args": [
                 "2015",
-                "3"
+                "3",
             ],
             "cwd": "${workspaceFolder}"
         },

@@ -1,8 +1,76 @@
-use aoc::read_to_chars;
-// use aoc::read_lines;
+//use aoc::read_to_chars;
+use aoc::read_lines;
 
 pub struct AoC2022_02 {
-    data: Vec<char>,
+    data: Vec<String>,
+}
+#[derive(Debug, Copy, Clone)]
+pub enum Move {
+    Rock = 1,
+    Paper = 2,
+    Scissors = 3,
+}
+
+#[derive(Debug, Copy, Clone)]
+pub enum Results {
+    Win = 6,
+    Lose = 0,
+    Draw = 3,
+}
+
+use Move::{Paper, Rock, Scissors};
+use Results::{Draw, Lose, Win};
+
+impl Move {
+    pub fn parse(c: &str) -> Option<Move> {
+        match c {
+            "A" | "X" => Some(Rock),
+            "B" | "Y" => Some(Paper),
+            "C" | "Z" => Some(Scissors),
+            _ => None,
+        }
+    }
+}
+
+impl Results {
+    pub fn parse(c: &str) -> Option<Results> {
+        match c {
+            "X" => Some(Lose),
+            "Y" => Some(Draw),
+            "Z" => Some(Win),
+            _ => None,
+        }
+    }
+}
+
+fn round(e: Move, m: Move) -> Results {
+    let temp = (e, m);
+    match temp {
+        (Rock, Rock) => Draw,
+        (Rock, Paper) => Win,
+        (Rock, Scissors) => Lose,
+        (Paper, Rock) => Lose,
+        (Paper, Paper) => Draw,
+        (Paper, Scissors) => Win,
+        (Scissors, Rock) => Win,
+        (Scissors, Paper) => Lose,
+        (Scissors, Scissors) => Draw,
+    }
+}
+
+fn fixed(enemy: Move, m: Results) -> Move {
+    let temp = (enemy, m);
+    match temp {
+        (Rock, Lose) => Scissors,
+        (Rock, Draw) => Rock,
+        (Rock, Win) => Paper,
+        (Paper, Lose) => Rock,
+        (Paper, Draw) => Paper,
+        (Paper, Win) => Scissors,
+        (Scissors, Lose) => Paper,
+        (Scissors, Draw) => Scissors,
+        (Scissors, Win) => Rock,
+    }
 }
 
 impl AoC2022_02 {
@@ -13,19 +81,41 @@ impl AoC2022_02 {
 
 impl crate::Runner for AoC2022_02 {
     fn parse(&mut self) {
-        self.data = read_to_chars("../input/2022/01.txt");
+        self.data = read_lines("../input/2022/02.txt");
     }
 
     //year, day
     fn name(&self) -> (usize, usize) {
-        (2022, 2)
+        (2022, 02)
     }
 
     fn part1(&mut self) -> Vec<String> {
-        crate::output("0".to_string())
+        let mut match_score = 0;
+        let mut hand_score = 0;
+        let matches = self.data.clone();
+        for d in matches {
+            let t: Vec<&str> = d.split(' ').collect();
+            let e = Move::parse(t[0]).unwrap();
+            let m = Move::parse(t[1]).unwrap();
+            hand_score = hand_score + m as i32;
+            match_score = match_score + round(e, m) as i32;
+        }
+        let total = match_score + hand_score;
+        crate::output(total.to_string())
     }
 
     fn part2(&mut self) -> Vec<String> {
-        crate::output("0".to_string())
+        let mut match_score = 0;
+        let mut hand_score = 0;
+        let matches = self.data.clone();
+        for d in matches {
+            let t: Vec<&str> = d.split(' ').collect();
+            let e = Move::parse(t[0]).unwrap();
+            let m = Results::parse(t[1]).unwrap();
+            hand_score = hand_score + fixed(e, m) as i32;
+            match_score = match_score + m as i32;
+        }
+        let total = match_score + hand_score;
+        crate::output(total.to_string())
     }
 }

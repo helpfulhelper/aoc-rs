@@ -1,8 +1,9 @@
-use aoc::read_to_chars;
+use aoc::read_lines;
+use md5;
 // use aoc::read_lines;
 
 pub struct AoC2015_04 {
-    data: Vec<char>,
+    data: Vec<String>,
 }
 
 impl AoC2015_04 {
@@ -13,7 +14,7 @@ impl AoC2015_04 {
 
 impl crate::Runner for AoC2015_04 {
     fn parse(&mut self) {
-        self.data = read_to_chars("../input/2015/04.txt");
+        self.data = read_lines("../input/2015/04.txt");
     }
 
     //year, day
@@ -22,6 +23,10 @@ impl crate::Runner for AoC2015_04 {
     }
 
     fn part1(&mut self) -> Vec<String> {
+        for x in 1.. {
+            let temp = self.data[0].clone() + &x.to_string();
+            let digest = md5::compute(temp);
+        }
         crate::output("0".to_string())
     }
 
