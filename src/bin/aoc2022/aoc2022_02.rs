@@ -22,23 +22,23 @@ use Move::{Paper, Rock, Scissors};
 use Results::{Draw, Lose, Win};
 
 impl Move {
-    pub fn parse(c: &str) -> Option<Move> {
+    pub fn parse(c: &str) -> Move {
         match c {
-            "A" | "X" => Some(Rock),
-            "B" | "Y" => Some(Paper),
-            "C" | "Z" => Some(Scissors),
-            _ => None,
+            "A" | "X" => Rock,
+            "B" | "Y" => Paper,
+            "C" | "Z" => Scissors,
+            _ => panic!("BAD!"),
         }
     }
 }
 
 impl Results {
-    pub fn parse(c: &str) -> Option<Results> {
+    pub fn parse(c: &str) -> Results {
         match c {
-            "X" => Some(Lose),
-            "Y" => Some(Draw),
-            "Z" => Some(Win),
-            _ => None,
+            "X" => Lose,
+            "Y" => Draw,
+            "Z" => Win,
+            _ => panic!("BAD!"),
         }
     }
 }
@@ -95,8 +95,8 @@ impl crate::Runner for AoC2022_02 {
         let matches = self.data.clone();
         for d in matches {
             let t: Vec<&str> = d.split(' ').collect();
-            let e = Move::parse(t[0]).unwrap();
-            let m = Move::parse(t[1]).unwrap();
+            let e = Move::parse(t[0]);
+            let m = Move::parse(t[1]);
             hand_score = hand_score + m as i32;
             match_score = match_score + round(e, m) as i32;
         }
@@ -110,8 +110,8 @@ impl crate::Runner for AoC2022_02 {
         let matches = self.data.clone();
         for d in matches {
             let t: Vec<&str> = d.split(' ').collect();
-            let e = Move::parse(t[0]).unwrap();
-            let m = Results::parse(t[1]).unwrap();
+            let e = Move::parse(t[0]);
+            let m = Results::parse(t[1]);
             hand_score = hand_score + fixed(e, m) as i32;
             match_score = match_score + m as i32;
         }
