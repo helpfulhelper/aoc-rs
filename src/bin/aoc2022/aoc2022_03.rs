@@ -1,62 +1,34 @@
 // use aoc::read_to_chars;
 use aoc::read_lines;
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::HashSet;
+
+trait Score {
+    fn score(&self) -> usize;
+}
+
+impl Score for char {
+    fn score(&self) -> usize {
+        (match self {
+            'a'..='z' => (*self as u8) - b'a' + 1,
+            'A'..='Z' => (*self as u8) - b'A' + 27,
+            _ => panic!("BAD"),
+        }) as usize
+    }
+}
 
 pub struct AoC2022_03 {
-    data: Vec<char>,
-    badges: Vec<char>,
-    scores: HashMap<char, usize>,
+    data: Vec<String>,
 }
 
 impl AoC2022_03 {
     pub fn new() -> Self {
-        Self {
-            data: Vec::new(),
-            badges: Vec::new(),
-            scores: gen_scores(),
-        }
+        Self { data: Vec::new() }
     }
-}
-
-fn gen_scores() -> HashMap<char, usize> {
-    let mut temp: HashMap<char, usize> = HashMap::new();
-    for (score, ch) in gen_alpha().iter().enumerate() {
-        temp.insert(ch.to_owned(), score + 1);
-    }
-    temp
-}
-
-fn gen_alpha() -> Vec<char> {
-    let alpha: Vec<char> = (b'a'..=b'z')
-        .map(|c| c as char)
-        .chain((b'A'..=b'Z').map(|c| c as char))
-        .collect();
-    return alpha.to_owned();
 }
 
 impl crate::Runner for AoC2022_03 {
     fn parse(&mut self) {
-        let lines = read_lines("../input/2022/03.txt");
-        for l in lines {
-            let (left, right) = l.split_at(l.len() / 2);
-            let lset: HashSet<char> = left.chars().collect();
-            let rset: HashSet<char> = right.chars().collect();
-            let dup = lset.intersection(&rset).collect::<String>();
-            self.data.push(dup.chars().nth(0).unwrap());
-        }
-
-        let lines2 = read_lines("../input/2022/03.txt");
-        let trio: Vec<Vec<String>> = lines2.chunks(3).map(|x| x.to_vec()).collect();
-        for t in trio {
-            let a: HashSet<char> = t[0].chars().collect();
-            let b: HashSet<char> = t[1].chars().collect();
-            let c: HashSet<char> = t[2].chars().collect();
-            let d1: HashSet<char> = a.intersection(&b).collect::<String>().chars().collect();
-            let d2 = d1.intersection(&c).collect::<String>();
-            self.badges.push(d2.chars().nth(0).unwrap());
-        }
-
-        // print!("{:?}", gen_alpha());
+        self.data = read_lines("../input/2022/03.txt");
     }
 
     //year, day
@@ -65,16 +37,31 @@ impl crate::Runner for AoC2022_03 {
     }
 
     fn part1(&mut self) -> Vec<String> {
-        let total: usize = self.data.iter().map(|c| self.scores.get(c).unwrap()).sum();
-        crate::output(total.to_string())
+        let mut total = 0;
+        for l in &self.data {
+            let (left, right) = l.split_at(l.len() / 2);
+            let lset: HashSet<char> = HashSet::from_iter(left.chars());
+            let rset: HashSet<char> = HashSet::from_iter(right.chars());
+            let dup = &lset & &rset;
+            total += (dup.iter().next().unwrap()).score();
+        }
+        crate::output(total)
     }
 
     fn part2(&mut self) -> Vec<String> {
-        let total: usize = self
-            .badges
-            .iter()
-            .map(|c| self.scores.get(c).unwrap())
-            .sum();
-        crate::output(total.to_string())
+        let mut total = 0;
+        for triple in self.data.chunks(3) {
+            let t: Vec<HashSet<char>> = triple
+                .iter()
+                .map(|z| HashSet::from_iter(z.chars()))
+                .collect();
+
+            let mut inter = t.iter().skip(1).fold(t[0].clone(), |acc, hset| {
+                acc.intersection(hset).cloned().collect()
+            });
+            total += (inter.iter().next().unwrap()).score();
+        }
+
+        crate::output(total)
     }
 }
