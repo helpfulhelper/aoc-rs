@@ -42,8 +42,7 @@ impl crate::Runner for AoC2022_03 {
             let (left, right) = l.split_at(l.len() / 2);
             let lset: HashSet<char> = HashSet::from_iter(left.chars());
             let rset: HashSet<char> = HashSet::from_iter(right.chars());
-            let dup = &lset & &rset;
-            total += (dup.iter().next().unwrap()).score();
+            total += (&lset & &rset).iter().next().unwrap().score();
         }
         crate::output(total)
     }
@@ -51,17 +50,17 @@ impl crate::Runner for AoC2022_03 {
     fn part2(&mut self) -> Vec<String> {
         let mut total = 0;
         for triple in self.data.chunks(3) {
-            let t: Vec<HashSet<char>> = triple
+            let vec_set: Vec<HashSet<char>> = triple
                 .iter()
-                .map(|z| HashSet::from_iter(z.chars()))
+                .map(|temp| HashSet::from_iter(temp.chars()))
                 .collect();
 
-            let mut inter = t.iter().skip(1).fold(t[0].clone(), |acc, hset| {
-                acc.intersection(hset).cloned().collect()
-            });
-            total += (inter.iter().next().unwrap()).score();
+            total += (&(&vec_set[0] & &vec_set[1]) & &vec_set[2])
+                .iter()
+                .next()
+                .unwrap()
+                .score();
         }
-
         crate::output(total)
     }
 }
