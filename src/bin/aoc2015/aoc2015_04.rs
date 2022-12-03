@@ -23,11 +23,15 @@ impl crate::Runner for AoC2015_04 {
     }
 
     fn part1(&mut self) -> Vec<String> {
+        let mut sol = 0;
         for x in 1.. {
             let temp = self.data[0].clone() + &x.to_string();
-            let digest = md5::compute(temp);
+            let digest = md5::compute(temp).to_ascii_lowercase();
+            // let t = digest.iter().take(5).collect();
+            // print!("{:?}", t);
+            break;
         }
-        crate::output("0".to_string())
+        crate::output(sol.to_string())
     }
 
     fn part2(&mut self) -> Vec<String> {
