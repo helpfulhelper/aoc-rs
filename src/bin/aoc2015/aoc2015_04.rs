@@ -26,9 +26,10 @@ impl crate::Runner for AoC2015_04 {
         let mut sol = 0;
         for x in 1.. {
             let temp = self.data[0].clone() + &x.to_string();
-            let digest = md5::compute(temp).to_ascii_lowercase();
-            // let t = digest.iter().take(5).collect();
-            // print!("{:?}", t);
+            let digest = format!("{:x}", md5::compute(&temp));
+            // if let t = digest.chars().take(5).collect() {
+
+            // }
             break;
         }
         crate::output(sol.to_string())

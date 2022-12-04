@@ -3,7 +3,7 @@ use crate::{Runner, Selector};
 mod aoc2022_01;
 mod aoc2022_02;
 mod aoc2022_03;
-// mod aoc2022_04;
+mod aoc2022_04;
 // mod aoc2022_05;
 // mod aoc2022_06;
 // mod aoc2022_07;
@@ -29,7 +29,7 @@ mod aoc2022_03;
 use aoc2022_01::*;
 use aoc2022_02::*;
 use aoc2022_03::*;
-// use aoc2022_04::*;
+use aoc2022_04::*;
 // use aoc2022_05::*;
 // use aoc2022_06::*;
 // use aoc2022_07::*;
@@ -56,7 +56,7 @@ pub fn run_2022(which: Selector) {
     let mut day01 = AoC2022_01::new();
     let mut day02 = AoC2022_02::new();
     let mut day03 = AoC2022_03::new();
-    // let mut day04 = AoC2022_04::new();
+    let mut day04 = AoC2022_04::new();
     // let mut day05 = AoC2022_05::new();
     // let mut day06 = AoC2022_06::new();
     // let mut day07 = AoC2022_07::new();
@@ -83,7 +83,7 @@ pub fn run_2022(which: Selector) {
         &mut day01,
         &mut day02,
         &mut day03,
-        // &mut day04,
+        &mut day04,
         // &mut day05,
         // &mut day06,
         // &mut day07,
