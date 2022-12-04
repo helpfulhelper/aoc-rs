@@ -21,9 +21,9 @@ fn contains(line: Vec<u32>) -> bool {
     // let rst = line[2];
     // let rend = line[3];
 
-    if rst >= lst && rend <= lend {
+    if lst <= rst && rend <= lend {
         return true;
-    } else if lst >= rst && lend <= rend {
+    } else if rst <= lst && lend <= rend {
         return true;
     }
     false
@@ -41,13 +41,13 @@ fn overlap(line: Vec<u32>) -> bool {
     //     .into_iter()
     //     .take(4)
     //     .collect::<(u32, u32, u32, u32)>();
-    if rst >= lst && rst <= lend {
+    if lst <= rst && rst <= lend {
         return true;
-    } else if lst >= rst && lst <= rend {
+    } else if rst <= lst && lst <= rend {
         return true;
-    } else if lend >= rst && lend <= rend {
+    } else if rst <= lend && lend <= rend {
         return true;
-    } else if rend >= lst && rend <= lend {
+    } else if lst <= rend && rend <= lend {
         return true;
     }
     false
