@@ -1,8 +1,5 @@
-use itertools::Itertools;
-use std::ops::Range;
-//use aoc::read_to_chars;
-//use aoc::numbers;
 use aoc::read_lines;
+use itertools::Itertools;
 
 pub struct AoC2022_04 {
     data: Vec<Vec<u32>>,
@@ -16,10 +13,6 @@ impl AoC2022_04 {
 
 fn contains(line: Vec<u32>) -> bool {
     let (lst, lend, rst, rend) = line.iter().next_tuple().unwrap();
-    // let lst = line[0];
-    // let lend = line[1];
-    // let rst = line[2];
-    // let rend = line[3];
 
     if lst <= rst && rend <= lend {
         return true;
@@ -31,16 +24,7 @@ fn contains(line: Vec<u32>) -> bool {
 
 fn overlap(line: Vec<u32>) -> bool {
     let (lst, lend, rst, rend) = line.iter().next_tuple().unwrap();
-    // let lst = line[0];
-    // let lend = line[1];
-    // let rst = line[2];
-    // let rend = line[3];
 
-    // let (lst, lend, rst, rend) = line
-    //     .clone()
-    //     .into_iter()
-    //     .take(4)
-    //     .collect::<(u32, u32, u32, u32)>();
     if lst <= rst && rst <= lend {
         return true;
     } else if rst <= lst && lst <= rend {
