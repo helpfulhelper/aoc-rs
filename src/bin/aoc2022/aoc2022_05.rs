@@ -122,10 +122,11 @@ impl crate::Runner for AoC2022_05 {
     }
 
     fn part2(&mut self) -> Vec<String> {
-        for m in self.orders.clone() {
+        let mut t = AoC2022_05::new();
+        for m in t.orders.clone() {
             let (a, b, c) = m;
-            self.exec_move2(a as usize, b as usize, c as usize);
+            t.exec_move2(a as usize, b as usize, c as usize);
         }
-        crate::output(self.stack_tops())
+        crate::output(t.stack_tops())
     }
 }
