@@ -5,7 +5,7 @@ mod aoc2022_02;
 mod aoc2022_03;
 mod aoc2022_04;
 mod aoc2022_05;
-// mod aoc2022_06;
+mod aoc2022_06;
 // mod aoc2022_07;
 // mod aoc2022_08;
 // mod aoc2022_09;
@@ -31,7 +31,7 @@ use aoc2022_02::*;
 use aoc2022_03::*;
 use aoc2022_04::*;
 use aoc2022_05::*;
-// use aoc2022_06::*;
+use aoc2022_06::*;
 // use aoc2022_07::*;
 // use aoc2022_08::*;
 // use aoc2022_09::*;
@@ -58,7 +58,7 @@ pub fn run_2022(which: Selector) {
     let mut day03 = AoC2022_03::new();
     let mut day04 = AoC2022_04::new();
     let mut day05 = AoC2022_05::new();
-    // let mut day06 = AoC2022_06::new();
+    let mut day06 = AoC2022_06::new();
     // let mut day07 = AoC2022_07::new();
     // let mut day08 = AoC2022_08::new();
     // let mut day09 = AoC2022_09::new();
@@ -85,7 +85,7 @@ pub fn run_2022(which: Selector) {
         &mut day03,
         &mut day04,
         &mut day05,
-        // &mut day06,
+        &mut day06,
         // &mut day07,
         // &mut day08,
         // &mut day09,
