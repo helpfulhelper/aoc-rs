@@ -50,6 +50,29 @@ impl crate::Runner for AoC2022_06 {
     }
 
     fn part2(&mut self) -> Vec<String> {
-        crate::output("0".to_string())
+        let uniq = self
+            .data
+            .clone()
+            .windows(14)
+            .flat_map(<&[char; 14]>::try_from)
+            .find_map(|&a| {
+                if a.iter().unique().collect::<Vec<&char>>().len() == 14 {
+                    Some(a)
+                } else {
+                    None
+                }
+            })
+            .unwrap()
+            .into_iter()
+            .collect::<String>();
+        println!("{:?}", uniq);
+        let packets = self
+            .data
+            .clone()
+            .into_iter()
+            .collect::<String>()
+            .find(&uniq);
+        println!("{:?}", packets.unwrap());
+        crate::output(packets.unwrap() + 14)
     }
 }
