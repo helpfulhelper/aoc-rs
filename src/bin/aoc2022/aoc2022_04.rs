@@ -1,9 +1,8 @@
 use aoc::read_lines;
-use nom::bytes::complete::tag;
-use nom::character::complete::digit1;
-use nom::combinator::map_res;
-use nom::sequence::separated_pair;
-use nom::IResult;
+use nom::{
+    bytes::complete::tag, character::complete::digit1, combinator::map_res,
+    sequence::separated_pair, IResult,
+};
 use std::str::FromStr;
 
 pub struct AoC2022_04 {
