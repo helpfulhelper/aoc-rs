@@ -23,56 +23,38 @@ impl crate::Runner for AoC2022_06 {
     }
 
     fn part1(&mut self) -> Vec<String> {
-        let uniq = self
-            .data
-            .clone()
-            .windows(4)
-            .flat_map(<&[char; 4]>::try_from)
-            .find_map(|&a| {
-                if a.iter().unique().collect::<Vec<&char>>().len() == 4 {
-                    Some(a)
-                } else {
-                    None
-                }
-            })
-            .unwrap()
-            .into_iter()
-            .collect::<String>();
-        println!("{:?}", uniq);
-        let packets = self
-            .data
-            .clone()
-            .into_iter()
-            .collect::<String>()
-            .find(&uniq);
-        println!("{:?}", packets.unwrap());
-        crate::output(packets.unwrap() + 4)
+        crate::output(solve(4, self.data.clone()))
     }
 
     fn part2(&mut self) -> Vec<String> {
-        let uniq = self
-            .data
-            .clone()
-            .windows(14)
-            .flat_map(<&[char; 14]>::try_from)
-            .find_map(|&a| {
-                if a.iter().unique().collect::<Vec<&char>>().len() == 14 {
-                    Some(a)
-                } else {
-                    None
-                }
-            })
-            .unwrap()
-            .into_iter()
-            .collect::<String>();
-        println!("{:?}", uniq);
-        let packets = self
-            .data
-            .clone()
-            .into_iter()
-            .collect::<String>()
-            .find(&uniq);
-        println!("{:?}", packets.unwrap());
-        crate::output(packets.unwrap() + 14)
+        crate::output(solve(14, self.data.clone()))
     }
+}
+
+fn solve(win: usize, data: Vec<char>) -> usize {
+    let uniq = find_first_unique(win, data.clone());
+    find_num_processed(win, data, &uniq)
+}
+
+fn find_first_unique(win: usize, data: Vec<char>) -> String {
+    let uniq = data
+        .clone()
+        .windows(win)
+        .flat_map(<Vec<char>>::try_from)
+        .find_map(|a| {
+            if a.iter().unique().collect::<Vec<&char>>().len() == win {
+                Some(a)
+            } else {
+                None
+            }
+        })
+        .unwrap()
+        .into_iter()
+        .collect::<String>();
+    println!("{:?}", uniq);
+    uniq
+}
+fn find_num_processed(win: usize, data: Vec<char>, uniq: &str) -> usize {
+    let packets = data.clone().into_iter().collect::<String>().find(&uniq);
+    packets.unwrap() + win
 }
